@@ -23,6 +23,9 @@ class naver_api:
         result = r.text
         parsed = xmltodict.parse(result)
 
+        if 'item' not in parsed['rss']['channel']:
+            return False
+
         return parsed['rss']['channel']['item']
 
     def jisikin_api(self,q,display_number=5):
@@ -31,6 +34,9 @@ class naver_api:
         r = requests.get(jisikin_api, headers=self.headers)
         result = r.text
         parsed = xmltodict.parse(result)
+
+        if 'item' not in parsed['rss']['channel']:
+            return False
 
         return parsed['rss']['channel']['item']
 

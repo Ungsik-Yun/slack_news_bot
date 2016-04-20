@@ -15,15 +15,18 @@ def search_news(msg, q):
     connector = naver_api()
     news_list = connector.news_api(q)
 
-    for i in news_list:
-        short_url = connector.short_url_api(i['originallink'])
-        attachments = [
-            {
-                'title': i['title'],
-                'title_link': short_url,
-                'text': i['description']
-            }]
-        msg.send_webapi('', json.dumps(attachments))
+    if news_list:
+        for i in news_list:
+            short_url = connector.short_url_api(i['originallink'])
+            attachments = [
+                {
+                    'title': i['title'],
+                    'title_link': short_url,
+                    'text': i['description']
+                }]
+            msg.send_webapi('', json.dumps(attachments))
+    else:
+        msg.reply("검색된 결과가 없습니다.")
 
 
 @listen_to("!지식인 (.*)", re.IGNORECASE)
@@ -31,15 +34,18 @@ def search_news(msg, q):
     connector = naver_api()
     jisik_list = connector.jisikin_api(q)
 
-    for i in jisik_list:
-        short_url = connector.short_url_api(i['link'])
-        attachments = [
-            {
-                'title': i['title'],
-                'title_link': short_url,
-                'text': i['description']
-            }]
-        msg.send_webapi('', json.dumps(attachments))
+    if jisik_list:
+        for i in jisik_list:
+            short_url = connector.short_url_api(i['link'])
+            attachments = [
+                {
+                    'title': i['title'],
+                    'title_link': short_url,
+                    'text': i['description']
+                }]
+            msg.send_webapi('', json.dumps(attachments))
+    else:
+        msg.reply("검색된 결과가 없습니다.")
 
 
 @listen_to("!단축 (.*)", re.IGNORECASE)
