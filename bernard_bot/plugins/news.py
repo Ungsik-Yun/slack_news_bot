@@ -26,7 +26,7 @@ def search_news(msg, q):
                 }]
             msg.send_webapi('', json.dumps(attachments))
     else:
-        msg.reply("검색된 결과가 없습니다.")
+        msg.reply("검색어 "+"`"+q+"` 로 " + "검색된 결과가 없습니다.")
 
 
 @listen_to("!지식인 (.*)", re.IGNORECASE)
@@ -45,7 +45,7 @@ def search_news(msg, q):
                 }]
             msg.send_webapi('', json.dumps(attachments))
     else:
-        msg.reply("검색된 결과가 없습니다.")
+        msg.reply("검색어 "+"`"+q+"` 로 " + "검색된 결과가 없습니다.")
 
 
 @listen_to("!단축 (.*)", re.IGNORECASE)
